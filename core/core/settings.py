@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-ua78-pl(mz&c80s021n(2*$iyo36_sd+h86jwuc*%59u9hvxf*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
 
 
 # Application definition
@@ -74,9 +75,18 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+    'lite': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    },
+
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": os.environ.get('WE_DBNAME'),
+        "USER": os.environ.get('WE_DBUSERNAME'),
+        "PASSWORD": os.environ.get('WE_DBPASSWORD'),
+        "HOST": os.environ.get('WE_DBHOST'),
+        "PORT": os.environ.get('WE_DBPORT')
     }
 }
 
