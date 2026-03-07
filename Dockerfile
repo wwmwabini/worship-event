@@ -35,5 +35,5 @@ RUN mkdir -p /app/media
 # Expose port 8000
 EXPOSE 8000
 
-# Run gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "core.wsgi:application"]
+# Run uvicorn
+CMD ["/bin/sh", "-c", "cd core; uvicorn core.core.asgi:application --host 0.0.0.0 --port 8000"]
