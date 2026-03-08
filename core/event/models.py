@@ -12,7 +12,9 @@ class Registration(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length=15)
     worship_type = models.TextField(choices=WORSHIP_TYPE, default="Solo")
-    notes = models.TextField(blank=True)
+    payment_transaction = models.TextField(blank=True)
+    payment_number = models.TextField(blank=True)
+    is_paid = models.BooleanField(default=False)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
 

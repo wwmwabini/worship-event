@@ -18,10 +18,11 @@ def event_home(request):
                     email=fields['email'],
                     phone=fields['phone'],
                     worship_type=fields['worship_type'],
-                    notes=fields['notes']
+                    payment_transaction=fields['payment_transaction'],
+                    payment_number=fields['payment_number'],
                 )
                 registration.save()
-                messages.success(request, 'Registration successful! Thank you for registering.')
+                messages.success(request, 'Thank you for registering. Your payment is being verified. You will receive a confirmation email shortly.')
             except Exception as e:
                 messages.error(request, f'An error occurred during registration: {e}')
             return redirect(f"{request.path}#contact")
